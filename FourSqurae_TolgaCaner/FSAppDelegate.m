@@ -13,9 +13,32 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    self.controller = [[FSViewController alloc] init];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.controller];
+    
+    
+    [self.window setRootViewController:navigationController];
+    
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
-							
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    
+    // NOTE: Here we grab the instatest:// url when safari redirects back to our application from the OAuth 2 flow. Don't forget to set this URL type (instatest://) under Info in Project Settings.
+    
+    NSLog(@"url: %@", url.absoluteString);
+    NSLog(@"sourceApplication: %@", sourceApplication);
+    NSLog(@"annotation: %@", annotation);
+    
+    NSArray *splittedString = [url.absoluteString componentsSeparatedByString:@"="];
+    NSString *accessToken = splittedString[1];
+    [self.controller saveToken:accessToken];
+    
+    return YES;
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -24,7 +47,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 

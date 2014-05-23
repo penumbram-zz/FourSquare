@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FSViewController.h"
 
 @interface FSAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong) FSViewController *controller;
 
 @end

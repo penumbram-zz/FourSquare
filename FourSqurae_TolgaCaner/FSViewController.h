@@ -10,4 +10,6 @@
 
 @interface FSViewController : UIViewController
 
+-(void)saveToken:(NSString*)token;
+
 @end
