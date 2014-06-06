@@ -10,4 +10,14 @@
 
 @interface FSInfoView : UIView
 
+@property (nonatomic,retain) UILabel* titleLabel;
+@property (nonatomic,retain) UITextView* descTV;
+@property (nonatomic,retain) UILabel* likelbl;
+@property (nonatomic,retain) UILabel* dislikelbl;
+@property (nonatomic,retain) UIButton* btn;
+@property (nonatomic,retain) NSString* venueID;
+
+@property (nonatomic, retain) UIButton* btnLike;
+@property (nonatomic, retain) UIButton* btnSimilar;
+
 @end

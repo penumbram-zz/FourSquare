@@ -8,11 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		275EBD7A4004468EBBF557AD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 79B29FCB861A4B52A9204D94 /* libPods.a */; };
+		FD674000194238A70065A088 /* FSCVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD673FFF194238A70065A088 /* FSCVCell.m */; };
+		FD674001194238A70065A088 /* FSCVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD673FFF194238A70065A088 /* FSCVCell.m */; };
+		FD67400419425E7F0065A088 /* FSInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD67400319425E7F0065A088 /* FSInfoView.m */; };
+		FD67400519425E7F0065A088 /* FSInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD67400319425E7F0065A088 /* FSInfoView.m */; };
 		FDA2FE3F193C93340027D375 /* FSCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA2FE3E193C93340027D375 /* FSCollectionViewController.m */; };
 		FDA2FE40193C93340027D375 /* FSCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA2FE3E193C93340027D375 /* FSCollectionViewController.m */; };
-		FDA2FE43193C99E60027D375 /* CVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA2FE42193C99E60027D375 /* CVCell.m */; };
-		FDA2FE44193C99E60027D375 /* CVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA2FE42193C99E60027D375 /* CVCell.m */; };
 		FDA2FE46193CDACC0027D375 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDA2FE45193CDACC0027D375 /* QuartzCore.framework */; };
+		FDA2FE48194222FE0027D375 /* FSCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FDA2FE47194222FE0027D375 /* FSCollectionView.xib */; };
+		FDA2FE49194222FE0027D375 /* FSCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FDA2FE47194222FE0027D375 /* FSCollectionView.xib */; };
 		FDD43181190A848F0056B7DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD43180190A848F0056B7DA /* Foundation.framework */; };
 		FDD43183190A848F0056B7DA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD43182190A848F0056B7DA /* CoreGraphics.framework */; };
 		FDD43185190A848F0056B7DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD43184190A848F0056B7DA /* UIKit.framework */; };
@@ -42,11 +46,14 @@
 /* Begin PBXFileReference section */
 		22BF11D1419B4F72A261AA80 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		79B29FCB861A4B52A9204D94 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD673FFE194238A70065A088 /* FSCVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCVCell.h; sourceTree = "<group>"; };
+		FD673FFF194238A70065A088 /* FSCVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCVCell.m; sourceTree = "<group>"; };
+		FD67400219425E7F0065A088 /* FSInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSInfoView.h; sourceTree = "<group>"; };
+		FD67400319425E7F0065A088 /* FSInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSInfoView.m; sourceTree = "<group>"; };
 		FDA2FE3D193C93340027D375 /* FSCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCollectionViewController.h; sourceTree = "<group>"; };
 		FDA2FE3E193C93340027D375 /* FSCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCollectionViewController.m; sourceTree = "<group>"; };
-		FDA2FE41193C99E60027D375 /* CVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVCell.h; sourceTree = "<group>"; };
-		FDA2FE42193C99E60027D375 /* CVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVCell.m; sourceTree = "<group>"; };
 		FDA2FE45193CDACC0027D375 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		FDA2FE47194222FE0027D375 /* FSCollectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FSCollectionView.xib; sourceTree = "<group>"; };
 		FDD4317D190A848F0056B7DA /* FourSqurae_TolgaCaner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FourSqurae_TolgaCaner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDD43180190A848F0056B7DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FDD43182190A848F0056B7DA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -135,8 +142,11 @@
 				FDD43192190A84910056B7DA /* Main.storyboard */,
 				FDA2FE3D193C93340027D375 /* FSCollectionViewController.h */,
 				FDA2FE3E193C93340027D375 /* FSCollectionViewController.m */,
-				FDA2FE41193C99E60027D375 /* CVCell.h */,
-				FDA2FE42193C99E60027D375 /* CVCell.m */,
+				FD673FFE194238A70065A088 /* FSCVCell.h */,
+				FD673FFF194238A70065A088 /* FSCVCell.m */,
+				FDA2FE47194222FE0027D375 /* FSCollectionView.xib */,
+				FD67400219425E7F0065A088 /* FSInfoView.h */,
+				FD67400319425E7F0065A088 /* FSInfoView.m */,
 				FDD43195190A84910056B7DA /* FSViewController.h */,
 				FDD43196190A84910056B7DA /* FSViewController.m */,
 				FDD43198190A84910056B7DA /* Images.xcassets */,
@@ -253,6 +263,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDA2FE48194222FE0027D375 /* FSCollectionView.xib in Resources */,
 				FDD43199190A84910056B7DA /* Images.xcassets in Resources */,
 				FDD4318B190A848F0056B7DA /* InfoPlist.strings in Resources */,
 				FDD43194190A84910056B7DA /* Main.storyboard in Resources */,
@@ -263,6 +274,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDA2FE49194222FE0027D375 /* FSCollectionView.xib in Resources */,
 				FDD431AA190A84920056B7DA /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -308,9 +320,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDD4318D190A848F0056B7DA /* main.m in Sources */,
+				FD67400419425E7F0065A088 /* FSInfoView.m in Sources */,
 				FDD43191190A84900056B7DA /* FSAppDelegate.m in Sources */,
 				FDD43197190A84910056B7DA /* FSViewController.m in Sources */,
-				FDA2FE43193C99E60027D375 /* CVCell.m in Sources */,
+				FD674000194238A70065A088 /* FSCVCell.m in Sources */,
 				FDA2FE3F193C93340027D375 /* FSCollectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,9 +332,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD674001194238A70065A088 /* FSCVCell.m in Sources */,
 				FDD431AC190A84920056B7DA /* FourSqurae_TolgaCanerTests.m in Sources */,
 				FDA2FE40193C93340027D375 /* FSCollectionViewController.m in Sources */,
-				FDA2FE44193C99E60027D375 /* CVCell.m in Sources */,
+				FD67400519425E7F0065A088 /* FSInfoView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

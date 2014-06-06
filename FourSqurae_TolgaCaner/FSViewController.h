@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "FSCollectionViewController.h"
 
-@interface FSViewController : UIViewController
-
+@interface FSViewController : UIViewController <UITextFieldDelegate>
+{
+    UITextField* textfield1;
+    UITextField* textfield2;
+}
 
 -(void)saveToken:(NSString*)token;
 
