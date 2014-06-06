@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FSCollectionViewController.h"
 
 @interface FSViewController : UIViewController
 
+
 -(void)saveToken:(NSString*)token;
+
 
 @end

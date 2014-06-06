@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
+#import "CVCell.h"
 
-@interface FSCollectionViewController : UIViewController
+@interface FSCollectionViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,CLLocationManagerDelegate>
+{
+    UICollectionView *_collectionView;
+    CLLocationManager *locationManager;
+    CLLocation *currentLocation;
+}
+
+
 
 @end
