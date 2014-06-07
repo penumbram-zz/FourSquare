@@ -1,6 +1,6 @@
 # README #
 
-###   FourSquare trending place searcher with coordinates.
+###   FourSquare trending place searcher with coordinates. by Tolga Caner 1038755
 This application will do an authentication with FourSquare to do some things that can be already done in FourSquare, but with a really worse graphical design and probably worse Objective-C design.
 
 ### This repository exists to: ###
