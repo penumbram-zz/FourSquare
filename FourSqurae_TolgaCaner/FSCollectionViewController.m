@@ -63,7 +63,7 @@
     NSString* coordinates= [NSString stringWithFormat:@"%@,%@",self.latitude,self.longitude];
     NSDictionary *parameters = @{@"ll": coordinates,@"limit": @"10",@"radius": @"1500"};
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
- 
+    [SVProgressHUD show];
     [manager GET:venues parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
          NSDictionary* dict = (NSDictionary*)responseObject;
@@ -84,8 +84,10 @@
          totalUsers = [NSMutableArray arrayWithArray:usersCount];
          venueIDs = [NSMutableArray arrayWithArray:allIDs];
          [_collectionView reloadData];
+         [SVProgressHUD dismiss];
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          NSLog(@"fail: %@", error);
+         [SVProgressHUD dismiss];
      }];
     
     
@@ -132,15 +134,18 @@
     NSURL *imageURL = [NSURL URLWithString:urlStr];
     
     NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
+    [SVProgressHUD show];
     AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Response: %@", responseObject);
         [[self infoView] imageView].image = responseObject;
         [self imageViewMode:YES];
+        [SVProgressHUD dismiss];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Image error: %@", error);
+        
     }];
     [requestOperation start];
 }
@@ -158,7 +163,7 @@
     
     NSDictionary *parameters = @{@"VENUE_ID": venueID,@"set": likeState};
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
+    [SVProgressHUD show];
     [manager POST:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
          NSDictionary* dict = (NSDictionary*)responseObject;
@@ -166,9 +171,6 @@
          // meta 0, notifications 1, response 2. -- We are interested in the response here.
          NSArray* array = [arr objectAtIndex:2];
          NSString* likeCount = [[array valueForKey:@"likes"] valueForKey:@"count"];
-         
-         
-         
          NSString* summary = [[array valueForKey:@"likes"] valueForKey:@"summary"];
          NSString* summaryStr = [NSString stringWithFormat:@"%@",summary];
          
@@ -179,10 +181,12 @@
          }
          
          [[infoView likelbl] setText:summaryStr];
+         [SVProgressHUD dismiss];
          
          
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          NSLog(@"fail: %@", error);
+         [SVProgressHUD dismiss];
      }];
 }
 
@@ -192,7 +196,7 @@
     [self setLastClickedCellID:[array objectAtIndex:0]];
     [[infoView titleLabel] setText:[array objectAtIndex:1]];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
+    [SVProgressHUD show];
     [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
          NSDictionary* dict = (NSDictionary*)responseObject;
@@ -222,8 +226,10 @@
          
          [[self infoView] setHidden:NO];
          [self setBGForState:FALSE];
+         [SVProgressHUD dismiss];
          
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         [SVProgressHUD dismiss];
          NSLog(@"fail: %@", error);
      }];
     
@@ -237,7 +243,7 @@
     
     NSDictionary *parameters = @{@"VENUE_ID": venueID};
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
+    [SVProgressHUD show];
     [manager GET:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
          NSDictionary* dict = (NSDictionary*)responseObject;
@@ -260,8 +266,10 @@
          [_collectionView reloadData];
          [self setBGForState:YES];
          [[self infoView] setHidden:YES];
+         [SVProgressHUD dismiss];
          
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         [SVProgressHUD dismiss];
          NSLog(@"fail: %@", error);
      }];
 }
@@ -274,7 +282,7 @@
     
     NSDictionary *parameters = @{@"VENUE_ID": venueID};
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
+    [SVProgressHUD show];
     [manager GET:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
          NSDictionary* dict = (NSDictionary*)responseObject;
@@ -292,24 +300,24 @@
          NSString* suffix = [NSString stringWithFormat:@"%@",[[suffixes objectAtIndex:2] objectAtIndex:imageCount.intValue]];
          NSString* urlStr = [[NSString alloc] init];
          urlStr = [NSString stringWithFormat:@"%@280x440%@",prefix,suffix];
-        NSURL *imageURL = [NSURL URLWithString:urlStr];
-         NSLog(urlStr);
-        
-    
+         NSURL *imageURL = [NSURL URLWithString:urlStr];
          NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
+         
          AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
          requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
          [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
              NSLog(@"Response: %@", responseObject);
              [[self infoView] imageView].image = responseObject;
              [self imageViewMode:YES];
-             
+             [SVProgressHUD dismiss];
          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             [SVProgressHUD dismiss];
              NSLog(@"Image error: %@", error);
          }];
          [requestOperation start];
          
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         [SVProgressHUD dismiss];
          NSLog(@"fail: %@", error);
      }];
 }
@@ -329,7 +337,7 @@
     
     NSDictionary *parameters = @{@"VENUE_ID": venueID};
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
+    [SVProgressHUD show];
     [manager GET:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
          NSDictionary* dict = (NSDictionary*)responseObject;
@@ -352,8 +360,10 @@
          [_collectionView reloadData];
          [self setBGForState:YES];
          [[self infoView] setHidden:YES];
+         [SVProgressHUD dismiss];
          
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         [SVProgressHUD dismiss];
          NSLog(@"fail: %@", error);
      }];
 }

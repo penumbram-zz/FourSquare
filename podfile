@@ -1,1 +1,3 @@
 pod 'AFNetworking', '~> 2.0'
+pod 'SVProgressHUD', :head
+workspace 'FourSquare_TolgaCaner'
