@@ -19,5 +19,10 @@
 
 @property (nonatomic, retain) UIButton* btnLike;
 @property (nonatomic, retain) UIButton* btnSimilar;
+@property (nonatomic, retain) UIButton* btnImages;
+@property (nonatomic, retain) UIButton* btnNextImage;
+@property (nonatomic, retain) UIButton* btnLeaveImageView;
+@property (nonatomic, retain) UIButton* btnNextVenues;
+@property (nonatomic,retain) UIImageView* imageView;
 
 @end
