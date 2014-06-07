@@ -17,7 +17,7 @@
 @end
 
 @implementation FSCollectionViewController
-@synthesize _collectionView,latitude,longitude, venueNames,totalCheckins,totalTips,totalUsers,venueIDs,infoView,lastClickedCellID;
+@synthesize _collectionView,latitude,longitude, venueNames,totalCheckins,totalTips,totalUsers,venueIDs,infoView,lastClickedCellID,photoPrefixes,photoSuffixes,imageCount;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,6 +39,8 @@
     totalTips = [[NSMutableArray alloc]init];
     totalCheckins = [[NSMutableArray alloc]init];
     venueIDs = [[NSMutableArray alloc]init];
+    photoPrefixes = [[NSArray alloc] init];
+    photoSuffixes = [[NSArray alloc] init];
     
     infoView = [[FSInfoView alloc] initWithFrame:CGRectMake(0, 0, 360, 360)];
     
@@ -47,6 +49,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideSubView:) name:@"hideSubView" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(likeVenue:) name:@"like" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(findSimilar:) name:@"similar" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getImages:) name:@"images" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(nextImage:) name:@"nextImage" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getNextVenues:) name:@"events" object:nil];
     
     NSDate *today = [NSDate date];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
@@ -111,6 +116,33 @@
 -(void)hideSubView:(NSNotification *)notification
 {
     [self setBGForState:YES];
+}
+
+-(void)nextImage:(NSNotification *)notification
+{
+   if ([[photoPrefixes objectAtIndex:2]count] == imageCount.intValue+1)
+       imageCount = [NSNumber numberWithInt:0];
+    
+    [self setImageCount:[NSNumber numberWithInt:imageCount.intValue+1]];
+    
+    NSString* prefix = [NSString stringWithFormat:@"%@",[[photoPrefixes objectAtIndex:2] objectAtIndex:imageCount.intValue]];
+    NSString* suffix = [NSString stringWithFormat:@"%@",[[photoSuffixes objectAtIndex:2] objectAtIndex:imageCount.intValue]];
+    NSString* urlStr = [[NSString alloc] init];
+    urlStr = [NSString stringWithFormat:@"%@280x440%@",prefix,suffix];
+    NSURL *imageURL = [NSURL URLWithString:urlStr];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
+    AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
+    [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Response: %@", responseObject);
+        [[self infoView] imageView].image = responseObject;
+        [self imageViewMode:YES];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Image error: %@", error);
+    }];
+    [requestOperation start];
 }
 
 -(void)likeVenue:(NSNotification *)notification
@@ -233,6 +265,99 @@
          NSLog(@"fail: %@", error);
      }];
 }
+
+-(void)getImages:(NSNotification *)notification
+{
+    NSArray* temp = [[notification object] componentsSeparatedByString:@"|"];
+    NSString* venueID = [temp objectAtIndex:0];
+    NSString* urlString = [NSString stringWithFormat:@"https://api.foursquare.com/v2/venues/%@/photos?oauth_token=%@&v=%@",venueID,[[NSUserDefaults standardUserDefaults] objectForKey:@"foursquare_token"],self.dateString];
+    
+    NSDictionary *parameters = @{@"VENUE_ID": venueID};
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    [manager GET:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         NSDictionary* dict = (NSDictionary*)responseObject;
+         NSArray * arr = [dict allValues];
+         imageCount = [NSNumber numberWithInt:0];
+         // meta 0, notifications 1, response 2. -- We are interested in the response here.
+         NSArray* array = [arr objectAtIndex:2];
+         NSArray* photos = [[arr valueForKey:@"photos"] valueForKey:@"items"];
+         NSArray*prefixes = [NSArray arrayWithArray:[photos valueForKey:@"prefix"]];
+         NSArray*suffixes = [NSArray arrayWithArray:[photos valueForKey:@"suffix"]];
+         photoSuffixes = [NSMutableArray arrayWithArray:suffixes];
+         photoPrefixes = [NSMutableArray arrayWithArray:prefixes];
+                  
+         NSString* prefix = [NSString stringWithFormat:@"%@",[[prefixes objectAtIndex:2] objectAtIndex:imageCount.intValue]];
+         NSString* suffix = [NSString stringWithFormat:@"%@",[[suffixes objectAtIndex:2] objectAtIndex:imageCount.intValue]];
+         NSString* urlStr = [[NSString alloc] init];
+         urlStr = [NSString stringWithFormat:@"%@280x440%@",prefix,suffix];
+        NSURL *imageURL = [NSURL URLWithString:urlStr];
+         NSLog(urlStr);
+        
+    
+         NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
+         AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+         requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
+         [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+             NSLog(@"Response: %@", responseObject);
+             [[self infoView] imageView].image = responseObject;
+             [self imageViewMode:YES];
+             
+         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             NSLog(@"Image error: %@", error);
+         }];
+         [requestOperation start];
+         
+     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         NSLog(@"fail: %@", error);
+     }];
+}
+
+-(void)imageViewMode:(BOOL)b
+{
+    [[[self infoView] imageView] setHidden:!b];
+    [[[self infoView] btnNextImage] setHidden:!b];
+    [[[self infoView]btnLeaveImageView] setHidden:!b];
+}
+
+-(void)getNextVenues:(NSNotification *)notification
+{
+    NSArray* temp = [[notification object] componentsSeparatedByString:@"|"];
+    NSString* venueID = [temp objectAtIndex:0];
+    NSString* urlString = [NSString stringWithFormat:@"https://api.foursquare.com/v2/venues/%@/nextvenues?oauth_token=%@&v=%@",venueID,[[NSUserDefaults standardUserDefaults] objectForKey:@"foursquare_token"],self.dateString];
+    
+    NSDictionary *parameters = @{@"VENUE_ID": venueID};
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    [manager GET:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         NSDictionary* dict = (NSDictionary*)responseObject;
+         NSArray * arr = [dict allValues];
+         // meta 0, notifications 1, response 2. -- We are interested in the response here.
+         NSArray* array = [arr objectAtIndex:2];
+         NSArray* items = [[array valueForKey:@"nextVenues"] valueForKey:@"items"];
+         NSArray* names = [items valueForKey:@"name"];
+         NSArray* allIDs = [items valueForKey:@"id"];
+         NSArray* stats = [items valueForKey:@"stats"];
+         NSArray* checkinsCount = [stats valueForKey:@"checkinsCount"];
+         NSArray* tipCount = [stats valueForKey:@"tipCount"];
+         NSArray* usersCount = [stats valueForKey:@"usersCount"];
+         
+         venueNames = [NSMutableArray arrayWithArray:names];
+         totalCheckins = [NSMutableArray arrayWithArray:checkinsCount];
+         totalTips = [NSMutableArray arrayWithArray:tipCount];
+         totalUsers = [NSMutableArray arrayWithArray:usersCount];
+         venueIDs = [NSMutableArray arrayWithArray:allIDs];
+         [_collectionView reloadData];
+         [self setBGForState:YES];
+         [[self infoView] setHidden:YES];
+         
+     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         NSLog(@"fail: %@", error);
+     }];
+}
+
 
 -(void)setBGForState:(BOOL)b
 {

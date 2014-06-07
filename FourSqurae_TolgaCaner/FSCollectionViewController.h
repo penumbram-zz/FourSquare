@@ -27,7 +27,10 @@
 @property (nonatomic, strong) NSMutableArray *totalTips;
 @property (nonatomic, strong) NSMutableArray *totalUsers;
 @property (nonatomic, strong) NSMutableArray *venueIDs;
+@property (nonatomic, strong) NSMutableArray *photoSuffixes;
+@property (nonatomic, strong) NSMutableArray *photoPrefixes;
 @property (nonatomic, strong) FSInfoView* infoView;
 @property (nonatomic, strong) NSString* lastClickedCellID;
+@property (nonatomic,strong) NSNumber* imageCount;
 
 @end
