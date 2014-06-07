@@ -22,9 +22,15 @@
     FSViewController* fsVC = [[FSViewController alloc] init];
     [fsVC setTitle:@"FourSquare 4 Square"];
     
-    UILabel *lbl1 = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2-100, -50, 200, 250)];
-    [lbl1 setText:@"Provide latitude - longitude coordinates in the texfields below and press search"];
-    [self.view addSubview:lbl1];
+    UITextView *tv1 = [[UITextView alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2-100, 20, 200, 90)];
+    [tv1 setText:@"Provide latitude - longitude coordinates in the texfields below and press search for trending places"];
+    [self.view addSubview:tv1];
+    [tv1 setUserInteractionEnabled:NO];
+    
+    UITextView *tv2 = [[UITextView alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2-100, 320, 200, 80)];
+    [tv2 setText:@"Popular Coordinates: Taksim(28.98,41.03) - Manhattan (-73.95,40.79) - Paris(2.35,48.85) - Do not forget '-' for west - south coordinates"];
+    [self.view addSubview:tv2];
+    [tv2 setUserInteractionEnabled:NO];
     
     UIButton* btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [btn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
