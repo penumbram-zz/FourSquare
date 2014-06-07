@@ -37,3 +37,5 @@ I did lots of googling during the development and received no help from any thir
 
 Thanks for reviewing my work, if a problem occurs you can send me and e-mail and i will respond to it a.s.a.p
 All the features i mention are tested and work fine, if any of them seem to not work, that could be caused by a bad commit - push in which case i would be glad to send the project in a mail attachment.
+
+P.S. I wanted to use SVProgressHUD between requests and responses but i had a problem with pod install/update stucking in "Analyzing Dependencies" part so i couldn't install the pod so be gentle between actions please.
