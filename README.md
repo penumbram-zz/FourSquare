@@ -1,14 +1,3 @@
-# README #
-
-###   FourSquare trending place searcher with coordinates for iPhone 3.5''. by Tolga Caner 1038755
-This application will do an authentication with FourSquare to do some things that can be already done in FourSquare, but with a really worse graphical design and probably worse Objective-C design.
-
-### This repository exists to: ###
-
-* Show my work
-* Get a good grade
-* And get one of [this](http://www.yalova.edu.tr/Files/Import/ucgen3/userfiles/1(21).jpg)
-
 ### Version 0.1 ###
 
 * Foursquare authentication
@@ -32,15 +21,6 @@ This application will do an authentication with FourSquare to do some things tha
 - See place Images (in a UIImageView) (3/5 api requests)
 - See similar places in the UICollectionView (4/5 api requests)
 - See next places in the UICollectionView (A foursquare feature i learned about during the development phase, a list of related places to the selected one ) (5/5 api requests)
-
-I did lots of googling during the development and received no help from any third party developer (except stackoverflow ofcourse)
-
-Thanks for reviewing my work, if a problem occurs you can send me and e-mail and i will respond to it a.s.a.p
-All the features i mention are tested and work fine, if any of them seem to not work, that could be caused by a bad commit - push in which case i would be glad to send the project in a mail attachment.
-
-P.S. As i am new to the CocoaPods utility, there has been a problem with .xcworkspace files and there is currently two of them. I cloned the project into a separate folder on my computer and built & ran both of them, both worked fine. Also as i mentioned, all test runs i made worked fine so, when in doubt with the coordinates, use the ones i provided to see the results like i tested them.
-
-The following are the screenshots:
 
 Main View:
 ![iOS Simulator Screen shot 07 Jun 2014 19.44.29.png](https://bitbucket.org/repo/7Mya48/images/3473504430-iOS%20Simulator%20Screen%20shot%2007%20Jun%202014%2019.44.29.png)
